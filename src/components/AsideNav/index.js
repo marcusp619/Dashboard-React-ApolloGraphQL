@@ -13,6 +13,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import ContractCard from '../ContractCard';
 import ServiceOrderCard from '../ServiceOrderCard';
+import InvoiceCard from '../InvoiceCard';
 
 const drawerWidth = 280;
 
@@ -81,7 +82,7 @@ function AsideNav(props) {
             <ServiceOrderCard />
           </Grid>
           <Grid item lg>
-            <ContractCard />
+            <InvoiceCard />
           </Grid>
         </Grid>
       </main>
