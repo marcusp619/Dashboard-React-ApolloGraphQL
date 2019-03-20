@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import List from '@material-ui/core/List';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
@@ -75,10 +76,15 @@ function AsideNav(props) {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Paper>
-          <InfoCard />
-          <InfoCard />
-        </Paper>
+        <Grid container spacing={24}>
+          <Grid item lg>
+            <InfoCard />
+            <InfoCard />
+          </Grid>
+          <Grid item lg>
+            <InfoCard />
+          </Grid>
+        </Grid>
       </main>
     </div>
   );
