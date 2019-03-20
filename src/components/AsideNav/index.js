@@ -14,7 +14,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import ContractCard from '../ContractCard';
 import ServiceOrderCard from '../ServiceOrderCard';
 import InvoiceCard from '../InvoiceCard';
-import { Paper, Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 
 const drawerWidth = 280;
 
@@ -89,7 +89,7 @@ function AsideNav(props) {
           <Grid item xs={12}>
             <div className={classes.overviewContainer}>
               <Grid item className={classes.overiewItem}>
-                <Typography variant="h4">3</Typography>
+                <Typography variant="h5">3</Typography>
                 <Typography
                   variant="subtitle1"
                   color={(classes.color = 'textSecondary')}
@@ -98,39 +98,40 @@ function AsideNav(props) {
                 </Typography>
               </Grid>
               <Grid item className={classes.overiewItem}>
-                <Typography variant="h4">3</Typography>
+                <Typography variant="h5">18</Typography>
                 <Typography
                   variant="subtitle1"
                   color={(classes.color = 'textSecondary')}
                 >
-                  Contracts
+                  Sites
                 </Typography>
               </Grid>
               <Grid item className={classes.overiewItem}>
-                <Typography variant="h4">3</Typography>
+                <Typography variant="h5">$52,745</Typography>
                 <Typography
                   variant="subtitle1"
                   color={(classes.color = 'textSecondary')}
                 >
-                  Contracts
+                  Billed Per Month
                 </Typography>
               </Grid>
               <Grid item className={classes.overiewItem}>
-                <Typography variant="h4">3</Typography>
+                <Typography variant="h5">Robert Taylor</Typography>
                 <Typography
                   variant="subtitle1"
                   color={(classes.color = 'textSecondary')}
                 >
-                  Contracts
+                  GCI Sales Contact
                 </Typography>
               </Grid>
             </div>
+            <Divider />
           </Grid>
-          <Grid item lg xs>
+          <Grid item lg xs md>
             <ContractCard />
             <ServiceOrderCard />
           </Grid>
-          <Grid item lg xs>
+          <Grid item lg xs md>
             <InvoiceCard />
           </Grid>
         </Grid>
