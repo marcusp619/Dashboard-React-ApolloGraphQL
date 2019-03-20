@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -12,6 +12,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import red from '@material-ui/core/colors/red';
+import Divider from '@material-ui/core/Divider';
 
 const styles = theme => ({
   card: {
@@ -36,7 +37,7 @@ const styles = theme => ({
   table: {}
 });
 
-class InfoCard extends React.Component {
+class ContractCard extends Component {
   render() {
     const { classes } = this.props;
 
@@ -55,6 +56,7 @@ class InfoCard extends React.Component {
           }
           title="Contract #HB-134"
         />
+        <Divider />
         <Table padding="dense" className={classes.table}>
           <TableHead>
             <TableRow>
@@ -91,8 +93,8 @@ class InfoCard extends React.Component {
   }
 }
 
-InfoCard.propTypes = {
+ContractCard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(InfoCard);
+export default withStyles(styles)(ContractCard);

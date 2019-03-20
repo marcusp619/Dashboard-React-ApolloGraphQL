@@ -11,7 +11,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import InfoCard from '../InfoCard';
+import ContractCard from '../ContractCard';
+import ServiceOrderCard from '../ServiceOrderCard';
 
 const drawerWidth = 280;
 
@@ -76,11 +77,11 @@ function AsideNav(props) {
         <div className={classes.toolbar} />
         <Grid container spacing={24}>
           <Grid item lg>
-            <InfoCard />
-            <InfoCard />
+            <ContractCard />
+            <ServiceOrderCard />
           </Grid>
           <Grid item lg>
-            <InfoCard />
+            <ContractCard />
           </Grid>
         </Grid>
       </main>
