@@ -14,6 +14,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import ContractCard from '../ContractCard';
 import ServiceOrderCard from '../ServiceOrderCard';
 import InvoiceCard from '../InvoiceCard';
+import { Paper, Typography } from '@material-ui/core';
 
 const drawerWidth = 280;
 
@@ -37,6 +38,14 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3
+  },
+  overviewContainer: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  overiewItem: {
+    textAlign: 'center',
+    flexGrow: 1
   }
 });
 
@@ -77,11 +86,51 @@ function AsideNav(props) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Grid container spacing={24}>
-          <Grid item lg>
+          <Grid item xs={12}>
+            <div className={classes.overviewContainer}>
+              <Grid item className={classes.overiewItem}>
+                <Typography variant="h4">3</Typography>
+                <Typography
+                  variant="subtitle1"
+                  color={(classes.color = 'textSecondary')}
+                >
+                  Contracts
+                </Typography>
+              </Grid>
+              <Grid item className={classes.overiewItem}>
+                <Typography variant="h4">3</Typography>
+                <Typography
+                  variant="subtitle1"
+                  color={(classes.color = 'textSecondary')}
+                >
+                  Contracts
+                </Typography>
+              </Grid>
+              <Grid item className={classes.overiewItem}>
+                <Typography variant="h4">3</Typography>
+                <Typography
+                  variant="subtitle1"
+                  color={(classes.color = 'textSecondary')}
+                >
+                  Contracts
+                </Typography>
+              </Grid>
+              <Grid item className={classes.overiewItem}>
+                <Typography variant="h4">3</Typography>
+                <Typography
+                  variant="subtitle1"
+                  color={(classes.color = 'textSecondary')}
+                >
+                  Contracts
+                </Typography>
+              </Grid>
+            </div>
+          </Grid>
+          <Grid item lg xs>
             <ContractCard />
             <ServiceOrderCard />
           </Grid>
-          <Grid item lg>
+          <Grid item lg xs>
             <InvoiceCard />
           </Grid>
         </Grid>
