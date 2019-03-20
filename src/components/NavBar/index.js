@@ -10,12 +10,15 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1
   },
   grow: {
     flexGrow: 1
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1
   },
   menuButton: {
     marginLeft: -12,
@@ -24,7 +27,7 @@ const styles = {
   profileButton: {
     color: 'white'
   }
-};
+});
 
 class NavBar extends Component {
   state = {
@@ -45,7 +48,7 @@ class NavBar extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
             <IconButton
               className={classes.menuButton}
@@ -55,7 +58,7 @@ class NavBar extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              News
+              GCI
             </Typography>
             <Button
               className={classes.profileButton}
