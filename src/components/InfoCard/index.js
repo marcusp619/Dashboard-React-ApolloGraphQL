@@ -1,47 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import classnames from 'classnames';
+import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import red from '@material-ui/core/colors/red';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import red from '@material-ui/core/colors/red';
 
 const styles = theme => ({
   card: {
-    maxWidth: 400
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%' // 16:9
+    maxWidth: '400px'
   },
   actions: {
-    display: 'flex'
+    display: 'flex',
+    flex: 1
   },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest
-    })
+  expiringLabel: {
+    color: red[900],
+    background: red[100],
+    padding: '2px 4px',
+    borderRadius: '3px'
   },
-  expandOpen: {
-    transform: 'rotate(180deg)'
-  },
-  avatar: {
-    backgroundColor: red[500]
+  labelContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    flex: 1
   }
 });
 
 class InfoCard extends React.Component {
-  state = { expanded: false };
-
-  handleExpandClick = () => {
-    this.setState(state => ({ expanded: !state.expanded }));
-  };
-
   render() {
     const { classes } = this.props;
 
@@ -49,9 +37,14 @@ class InfoCard extends React.Component {
       <Card className={classes.card}>
         <CardHeader
           action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
+            <div className={classes.labelContainer}>
+              <Typography variant="subtitle2" className={classes.expiringLabel}>
+                EXPIRING
+              </Typography>
+              <IconButton>
+                <MoreVertIcon />
+              </IconButton>
+            </div>
           }
           title="Contract #HB-134"
         />
