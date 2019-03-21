@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -8,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { CardContent } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
 const styles = theme => ({
   card: {
@@ -33,139 +35,70 @@ const styles = theme => ({
   }
 });
 
-class InvoiceCard extends Component {
-  render() {
-    const { classes } = this.props;
+function InvoiceCard(props) {
+  const { classes } = props;
 
-    return (
-      <Card className={classes.card}>
-        <CardHeader title="Recent Invoices" />
-        <Divider />
-        <CardContent>
-          <div className={classes.flexContainer}>
-            <Typography variant="subtitle2" inline>
-              Invoice #335783
-            </Typography>
-            <div>
-              <Typography variant="subtitle2" inline>
-                $275.00
-              </Typography>
-              <IconButton>
-                <MoreVertIcon />
-              </IconButton>
-            </div>
-          </div>
-          <div className={classes.flexContainer}>
-            <Typography
-              variant="body2"
-              color={(classes.color = 'textSecondary')}
-              gutterBottom
-            >
-              Due Soon
-            </Typography>
-            <Typography
-              variant="body2"
-              color={(classes.color = 'textSecondary')}
-              className={classes.padding}
-              gutterBottom
-            >
-              Due on January 28, 2016
-            </Typography>
-          </div>
-          <div className={classes.flexContainer}>
-            <Typography variant="subtitle2" inline>
-              Invoice #335783
-            </Typography>
-            <div>
-              <Typography variant="subtitle2" inline>
-                $275.00
-              </Typography>
-              <IconButton>
-                <MoreVertIcon />
-              </IconButton>
-            </div>
-          </div>
-          <div className={classes.flexContainer}>
-            <Typography
-              variant="body2"
-              color={(classes.color = 'textSecondary')}
-              gutterBottom
-            >
-              Due Soon
-            </Typography>
-            <Typography
-              variant="body2"
-              color={(classes.color = 'textSecondary')}
-              className={classes.padding}
-              gutterBottom
-            >
-              Due on January 28, 2016
-            </Typography>
-          </div>
-          <div className={classes.flexContainer}>
-            <Typography variant="subtitle2" inline>
-              Invoice #335783
-            </Typography>
-            <div>
-              <Typography variant="subtitle2" inline>
-                $275.00
-              </Typography>
-              <IconButton>
-                <MoreVertIcon />
-              </IconButton>
-            </div>
-          </div>
-          <div className={classes.flexContainer}>
-            <Typography
-              variant="body2"
-              color={(classes.color = 'textSecondary')}
-              gutterBottom
-            >
-              Due Soon
-            </Typography>
-            <Typography
-              variant="body2"
-              color={(classes.color = 'textSecondary')}
-              className={classes.padding}
-              gutterBottom
-            >
-              Due on January 28, 2016
-            </Typography>
-          </div>
-          <div className={classes.flexContainer}>
-            <Typography variant="subtitle2" inline>
-              Invoice #335783
-            </Typography>
-            <div>
-              <Typography variant="subtitle2" inline>
-                $275.00
-              </Typography>
-              <IconButton>
-                <MoreVertIcon />
-              </IconButton>
-            </div>
-          </div>
-          <div className={classes.flexContainer}>
-            <Typography
-              variant="body2"
-              color={(classes.color = 'textSecondary')}
-              gutterBottom
-            >
-              Due Soon
-            </Typography>
-            <Typography
-              variant="body2"
-              color={(classes.color = 'textSecondary')}
-              className={classes.padding}
-              gutterBottom
-            >
-              Due on January 28, 2016
-            </Typography>
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
+  return (
+    <Query
+      query={gql`
+        {
+          invoices {
+            id
+            paid
+            paid_date
+            amount
+            due_date
+          }
+        }
+      `}
+    >
+      {({ loading, error, data }) => {
+        if (loading) return 'Loading...';
+        if (error) return `Error! ${error.message}`;
+
+        return (
+          <Card className={classes.card}>
+            <CardHeader title="Recent Invoices" />
+            <Divider />
+            {data.invoices.map(invoice => (
+              <CardContent key={invoice.id}>
+                <div className={classes.flexContainer}>
+                  <Typography variant="subtitle2" inline>
+                    Invoice {invoice.id}
+                  </Typography>
+                  <div>
+                    <Typography variant="subtitle2" inline>
+                      ${invoice.amount}
+                    </Typography>
+                    <IconButton>
+                      <MoreVertIcon />
+                    </IconButton>
+                  </div>
+                </div>
+                <div className={classes.flexContainer}>
+                  <Typography
+                    variant="body2"
+                    color={(classes.color = 'textSecondary')}
+                    gutterBottom
+                  >
+                    Due Soon
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color={(classes.color = 'textSecondary')}
+                    className={classes.padding}
+                    gutterBottom
+                  >
+                    Due on January 28, 2016
+                  </Typography>
+                </div>
+              </CardContent>
+            ))}
+          </Card>
+        );
+      }}
+    </Query>
+  );
 }
 
 InvoiceCard.propTypes = {
