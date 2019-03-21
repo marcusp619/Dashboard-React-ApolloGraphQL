@@ -15,3 +15,5 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 6: then run yarn start
 
 ## Screenshots
+![photo](https://github.com/marcusp619/Liberty-take-home/blob/master/Screen%20Shot%202019-03-20%20at%207.26.33%20PM.png)
+![photo](https://github.com/marcusp619/Liberty-take-home/blob/master/Screen%20Shot%202019-03-20%20at%207.26.58%20PM.png)
