@@ -37,6 +37,7 @@ const styles = theme => ({
 
 function InvoiceCard(props) {
   const { classes } = props;
+
   return (
     <Query
       query={gql`
