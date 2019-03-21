@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -8,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { CardContent } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
 const styles = theme => ({
   card: {
@@ -29,88 +31,108 @@ const styles = theme => ({
   }
 });
 
-class ServiceOrderCard extends Component {
-  render() {
-    const { classes } = this.props;
+function ServiceOrderCard(props) {
+  const { classes } = props;
 
-    return (
-      <Card className={classes.card}>
-        <CardHeader
-          action={
-            <div className={classes.labelContainer}>
-              <IconButton>
-                <MoreVertIcon />
-              </IconButton>
-            </div>
+  return (
+    <Query
+      query={gql`
+        {
+          order {
+            id
+            non_recurring_cost
+            non_recurring_cost_description
+            recurring_cost
+            recurring_cost_description
+            term_length
           }
-          title="Service Order #WT-239"
-        />
-        <Divider />
-        <CardContent>
-          <div className={classes.flexContainer}>
-            <Typography variant="subtitle2">November 24, 2015</Typography>
-            <Typography variant="subtitle2">$275.00 monthly</Typography>
-          </div>
-          <div className={classes.flexContainer}>
-            <Typography
-              variant="body2"
-              color={(classes.color = 'textSecondary')}
-              gutterBottom
-            >
-              3-year Term
-            </Typography>
-            <Typography
-              variant="body2"
-              color={(classes.color = 'textSecondary')}
-              gutterBottom
-            >
-              2 services
-            </Typography>
-          </div>
-          <div className={classes.flexContainer}>
-            <Typography variant="subtitle2">Non-Recurring Cost</Typography>
-            <Typography variant="subtitle2">Price</Typography>
-          </div>
-          <div className={classes.flexContainer}>
-            <Typography
-              variant="body2"
-              color={(classes.color = 'textSecondary')}
-              gutterBottom
-            >
-              Configuration and Testing of Equipment
-            </Typography>
-            <Typography
-              variant="body2"
-              color={(classes.color = 'textSecondary')}
-              gutterBottom
-            >
-              $3.485.00
-            </Typography>
-          </div>
-          <div className={classes.flexContainer}>
-            <Typography variant="subtitle2">Recurring Cost</Typography>
-            <Typography variant="subtitle2">Monthly Price</Typography>
-          </div>
-          <div className={classes.flexContainer}>
-            <Typography
-              variant="body2"
-              color={(classes.color = 'textSecondary')}
-              gutterBottom
-            >
-              Remote Site VPN
-            </Typography>
-            <Typography
-              variant="body2"
-              color={(classes.color = 'textSecondary')}
-              gutterBottom
-            >
-              $275.00
-            </Typography>
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
+        }
+      `}
+    >
+      {({ loading, error, data }) => {
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>Error :(</p>;
+
+        return (
+          <Card className={classes.card}>
+            <CardHeader
+              action={
+                <div className={classes.labelContainer}>
+                  <IconButton>
+                    <MoreVertIcon />
+                  </IconButton>
+                </div>
+              }
+              title={`Service Order #${data.order.id}`}
+            />
+            <Divider />
+            <CardContent>
+              <div className={classes.flexContainer}>
+                <Typography variant="subtitle2">November 24, 2015</Typography>
+                <Typography variant="subtitle2">$270</Typography>
+              </div>
+              <div className={classes.flexContainer}>
+                <Typography
+                  variant="body2"
+                  color={(classes.color = 'textSecondary')}
+                  gutterBottom
+                >
+                  {data.order.term_length}-year Term
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color={(classes.color = 'textSecondary')}
+                  gutterBottom
+                >
+                  2 services
+                </Typography>
+              </div>
+              <div className={classes.flexContainer}>
+                <Typography variant="subtitle2">Non-Recurring Cost</Typography>
+                <Typography variant="subtitle2">Price</Typography>
+              </div>
+              <div className={classes.flexContainer}>
+                <Typography
+                  variant="body2"
+                  color={(classes.color = 'textSecondary')}
+                  gutterBottom
+                >
+                  {data.order.non_recurring_cost_description}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color={(classes.color = 'textSecondary')}
+                  gutterBottom
+                >
+                  {data.order.non_recurring_cost}
+                </Typography>
+              </div>
+              <div className={classes.flexContainer}>
+                <Typography variant="subtitle2">Recurring Cost</Typography>
+                <Typography variant="subtitle2">Monthly Price</Typography>
+              </div>
+              <div className={classes.flexContainer}>
+                <Typography
+                  variant="body2"
+                  color={(classes.color = 'textSecondary')}
+                  gutterBottom
+                >
+                  {data.order.recurring_cost_description}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color={(classes.color = 'textSecondary')}
+                  gutterBottom
+                >
+                  {data.order.recurring_cost}
+                </Typography>
+              </div>
+            </CardContent>
+          </Card>
+        );
+      }}
+    </Query>
+  );
 }
 
 ServiceOrderCard.propTypes = {

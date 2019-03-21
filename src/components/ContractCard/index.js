@@ -41,6 +41,7 @@ const styles = theme => ({
 
 function ContractCard(props) {
   const { classes } = props;
+
   return (
     <Query
       query={gql`
@@ -79,7 +80,7 @@ function ContractCard(props) {
                   </IconButton>
                 </div>
               }
-              title={`Contract ${data.contract.id}`}
+              title={`Contract #${data.contract.id}`}
             />
             <Divider />
             <Table padding="dense" className={classes.table}>
